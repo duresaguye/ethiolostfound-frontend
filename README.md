@@ -1,8 +1,15 @@
-# React + Vite
+Ethiolost and Found - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ethiolost and Found is a dynamic web application designed to help users report and find lost and found items within Ethiopia. This repository contains the frontend code for the project, built with modern web technologies to provide an engaging and user-friendly interface.
+Features
 
-Currently, two official plugins are available:
+    User Registration and Authentication: Secure user sign-up and login functionality.
+    Item Listings: Users can browse and search for lost and found items.
+    Responsive Design: Optimized for various screen sizes and devices.
+    Interactive UI: Modern and intuitive user experience with real-time updates.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Technologies Used
+
+    React.js: For building the user interface and managing state.
+    Tailwind CSS: For styling and responsive design.
+    Axios: For making API requests to the backend.
