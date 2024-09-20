@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useItems } from './ItemsContext';
 import { FaSpinner } from 'react-icons/fa';
+import EmblemOfEthiopia from '../assets/Emblem_of_Ethiopia.svg.png';
 
 const Home = () => {
   const { items, loading, error } = useItems();
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [locationQuery, setLocationQuery] = useState(''); // New state for location
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -24,7 +26,8 @@ const Home = () => {
     .filter(item => 
       (filter === 'all' || item.item_type === filter) &&
       (item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-       item.description.toLowerCase().includes(searchQuery.toLowerCase()))
+       item.description.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (item.location.toLowerCase().includes(locationQuery.toLowerCase())) // Location filtering
     )
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -53,14 +56,19 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       <section className="text-center mb-6 p-6">
-        <h1 className="text-5xl font-extrabold mb-4 ">
+        <h1 className="text-5xl font-extrabold mb-4">
           <span className="text-green-600">Welcome to </span>
           <span className="text-yellow-600">Ethiolost</span>
-           <span className="text-red-600"> & Found!</span>
+          <img 
+            src={EmblemOfEthiopia} 
+            alt="Emblem of Ethiopia" 
+            className="w-10 h-10 inline-block align-middle ml-2"
+          />
+          <span className="text-red-600">  Found!</span>
         </h1>
         <p className="text-xl mb-6">
           Discover a world of lost and found treasures! Whether you are searching for a lost item or want to help reunite others with their belongings, you are in the right place. Sign up or log in to start posting, claiming, or browsing items that matter to you.
-          Let’s make sure <span className="font-bold">nothing goes missing!</span> 
+          Let’s make sure <span className="font-bold">nothing goes missing!</span>
         </p>
       </section>
 
@@ -71,6 +79,13 @@ const Home = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           className="px-4 py-2 mr-2 bg-gray-800 rounded-lg focus:outline-none text-white text-left"
+        />
+        <input
+          type="text"
+          placeholder="Search based on location..."
+          value={locationQuery}
+          onChange={(e) => setLocationQuery(e.target.value)}
+          className="px-4 py-2 bg-gray-800 rounded-lg focus:outline-none text-white text-left"
         />
       </section>
 
@@ -143,6 +158,16 @@ const Home = () => {
       </div>
 
       <div className="flex justify-center mt-6">
+        {/* Left Arrow Button */}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          className="px-4 py-2 mx-1 rounded-lg bg-gray-800 text-white"
+          disabled={currentPage === 1} // Disable when on the first page
+        >
+          &lt; {/* Left arrow */}
+        </button>
+
+        {/* Page Numbers */}
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
@@ -152,6 +177,15 @@ const Home = () => {
             {index + 1}
           </button>
         ))}
+
+        {/* Right Arrow Button */}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          className="px-4 py-2 mx-1 rounded-lg bg-gray-800 text-white"
+          disabled={currentPage === totalPages} // Disable when on the last page
+        >
+          &gt; {/* Right arrow */}
+        </button>
       </div>
     </div>
   );

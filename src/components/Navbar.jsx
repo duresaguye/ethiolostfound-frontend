@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import EmblemOfEthiopia from '../assets/Emblem_of_Ethiopia.svg.png';
+
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -24,8 +26,12 @@ const Navbar = () => {
               <span className="text-yellow-500 ml-1">L</span>
               <span className="text-red-500">o</span>
               <span className="text-blue-500">s</span>
-              <span className="text-green-500">t</span>
-              <span className="text-yellow-500 ml-1">&</span>
+            <span className="text-green-500">t</span>
+            <img 
+              src={EmblemOfEthiopia} 
+              alt="Emblem of Ethiopia" 
+              className="w-6 h-6" // Adjust the size here
+            />
               <span className="text-red-500 ml-1">F</span>
               <span className="text-blue-500">o</span>
               <span className="text-green-500">u</span>

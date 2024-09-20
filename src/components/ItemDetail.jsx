@@ -1,6 +1,5 @@
-// components/ItemDetails.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const ItemDetails = () => {
   const { id } = useParams();
@@ -47,8 +46,18 @@ const ItemDetails = () => {
           <h2 className="text-3xl font-bold mb-2">{item.title}</h2>
           <p className="mb-4">{item.description}</p>
           <p className="mb-2"><strong>Location:</strong> {item.location}</p>
-         <p className="mb-2"><strong>Date:</strong> {new Date(item.date_posted).toLocaleDateString()}</p>
+          <p className="mb-2"><strong>Date:</strong> {new Date(item.date_posted).toLocaleDateString()}</p>
           <p><strong>Contact:</strong> {item.contact}</p>
+
+          {/* Start Chat Button */}
+          <div className="mt-4">
+            <Link
+              to={`/chat/${item.id}/${item.ownerId}`}  // Assuming item.ownerId or item.contact holds the owner's ID
+              className="inline-block px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+            >
+              Start Chat
+            </Link>
+          </div>
         </div>
       </div>
     </div>
